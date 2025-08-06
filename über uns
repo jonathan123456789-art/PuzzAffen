@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Über uns – Putzaffen</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Über uns</h1>
+  <p>Wir sind ein junges, engagiertes Team und bringen deine Fenster zum Glänzen – gründlich, schnell und freundlich.</p>
+  <img src="bilder/team.jpg" alt="Unser Team" width="100%">
+  <a href="index.html">Zurück zur Startseite</a>
+</body>
+</html>
