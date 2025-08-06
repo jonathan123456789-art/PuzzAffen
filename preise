@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Preise – Putzaffen</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Unser Preis</h1>
+  <p>Wir arbeiten transparent und fair:</p>
+  <h2>➡ 10 € pro Stunde</h2>
+  <p>Keine versteckten Kosten. Keine Überraschungen.</p>
+  <a href="index.html">Zurück zur Startseite</a>
+</body>
+</html>
