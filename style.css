@@ -132,3 +132,18 @@ footer {
   padding: 15px;
   margin-top: 40px;
 }
+.buchung-button {
+  background-color: #fdd835;
+  color: black;
+  padding: 12px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 20px;
+  transition: background 0.3s;
+}
+
+.buchung-button:hover {
+  background-color: #fbc02d;
+}
