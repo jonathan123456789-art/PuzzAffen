@@ -3,23 +3,20 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #fafafa;
+  background: #f9f9f9;
   color: #333;
-  line-height: 1.6;
 }
 
-/* Header & Navigation (gleich wie auf Startseite) */
+/* Header mit Navigation */
 header {
   background-color: #222;
   color: white;
+  padding: 20px;
   text-align: center;
-  padding: 20px 0;
 }
 
 nav {
-  background-color: #222;
-  padding: 10px 0;
-  text-align: center;
+  margin-top: 10px;
 }
 
 nav a {
@@ -27,48 +24,39 @@ nav a {
   text-decoration: none;
   margin: 0 15px;
   font-weight: bold;
-  font-size: 16px;
 }
 
-nav a:hover {
-  color: #ffcc00;
+/* Hauptinhalt */
+main {
+  padding: 30px 20px;
+  text-align: center;
 }
 
-/* Boxen für Inhalt (zentriert wie auf Startseite) */
-.section-box {
-  max-width: 800px;
-  margin: 40px auto; /* mittig */
-  background: #fff;
-  padding: 30px 25px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
-  text-align: center; /* alles zentriert */
-}
-
-/* Überschriften */
-h1, h2 {
-  color: #111;
+/* Profilbild */
+.profilbild {
+  width: 220px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   margin-bottom: 20px;
 }
 
-/* Text in Boxen */
-.section-box p, .section-box li {
-  font-size: 16px;
-  margin-bottom: 15px;
+/* Begrüßungstext */
+.intro h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
 }
 
-/* Preise-Liste */
-.prices-list {
-  list-style: none;
-  padding: 0;
+.intro p {
+  font-size: 18px;
+  max-width: 600px;
+  margin: 0 auto 20px;
 }
 
-.prices-list li {
-  padding: 10px 0;
-  border-bottom: 1px solid #ddd;
+/* Buttons */
+.buttons {
+  margin-top: 20px;
 }
 
-/* Buttons (falls verwendet) */
 .btn {
   display: inline-block;
   padding: 12px 24px;
@@ -76,12 +64,65 @@ h1, h2 {
   color: #fff;
   border-radius: 6px;
   text-decoration: none;
-  margin: 10px 5px;
-  transition: background 0.3s;
+  margin: 0 10px;
+  transition: background 0.3s ease;
 }
 
 .btn:hover {
   background-color: #333;
+}
+
+.btn.secondary {
+  background-color: #ffd700;
+  color: #000;
+}
+
+/* Kontaktformular & Buchungsformular */
+#kontakt, #buchung {
+  background: #fff;
+  padding: 40px 20px;
+  max-width: 600px;
+  margin: 40px auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+form input, form textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form button {
+  padding: 12px 20px;
+  background-color: #111;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #333;
+}
+
+/* Bewertungen */
+#bewertungen {
+  background: #f0f0f0;
+  padding: 40px 20px;
+  margin-top: 40px;
+  border-top: 2px solid #ccc;
+}
+
+.review {
+  background: #fff;
+  padding: 15px;
+  margin: 15px auto;
+  max-width: 500px;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
 /* Footer */
@@ -89,18 +130,22 @@ footer {
   background-color: #222;
   color: white;
   text-align: center;
-  padding: 15px 0;
-  margin-top: 50px;
+  padding: 15px;
+  margin-top: 40px;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .section-box {
-    margin: 20px 15px;
-    padding: 20px;
-  }
-  nav a {
-    display: block;
-    margin: 5px 0;
-  }
+.buchung-button {
+  background-color: #fdd835;
+  color: black;
+  padding: 12px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 20px;
+  transition: background 0.3s;
+}
+
+.buchung-button:hover {
+  background-color: #fbc02d;
 }
