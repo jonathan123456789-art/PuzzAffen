@@ -84,29 +84,6 @@ nav a:hover {
 }
 
 /* Gelber Button fürs Buchungsformular */
-.button {
-  display: inline-block;
-  background-color: #ffcc00;
-  color: black;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 6px;
-  margin-top: 15px;
-}
-
-.button:hover {
-  background-color: #e6b800;
-}
-
-/* Footer */
-footer {
-  background-color: #222;
-  color: white;
-  padding: 15px 0;
-  margin-top: 40px;
-}
 .buchung-button {
   display: inline-block;
   background-color: #ffcc00; /* Gelb */
@@ -122,4 +99,12 @@ footer {
 
 .buchung-button:hover {
   background-color: #e6b800; /* Dunkleres Gelb beim Hover */
+}
+
+/* Footer */
+footer {
+  background-color: #222;
+  color: white;
+  padding: 15px 0;
+  margin-top: 40px;
 }
