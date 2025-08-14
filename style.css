@@ -3,20 +3,23 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: #f9f9f9;
+  background-color: #fafafa;
   color: #333;
+  line-height: 1.6;
 }
 
-/* Header mit Navigation */
+/* Header & Navigation (gleich wie auf Startseite) */
 header {
   background-color: #222;
   color: white;
-  padding: 20px;
   text-align: center;
+  padding: 20px 0;
 }
 
 nav {
-  margin-top: 10px;
+  background-color: #222;
+  padding: 10px 0;
+  text-align: center;
 }
 
 nav a {
@@ -24,165 +27,34 @@ nav a {
   text-decoration: none;
   margin: 0 15px;
   font-weight: bold;
-}
-
-/* Hauptinhalt */
-main {
-  padding: 30px 20px;
-  text-align: center;
-}
-
-/* Profilbild */
-.profilbild {
-  width: 220px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  margin-bottom: 20px;
-}
-
-/* Begrüßungstext */
-.intro h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.intro p {
-  font-size: 18px;
-  max-width: 600px;
-  margin: 0 auto 20px;
-}
-
-/* Buttons */
-.buttons {
-  margin-top: 20px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: #111;
-  color: #fff;
-  border-radius: 6px;
-  text-decoration: none;
-  margin: 0 10px;
-  transition: background 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #333;
-}
-
-.btn.secondary {
-  background-color: #ffd700;
-  color: #000;
-}
-
-/* Kontaktformular & Buchungsformular */
-#kontakt, #buchung {
-  background: #fff;
-  padding: 40px 20px;
-  max-width: 600px;
-  margin: 40px auto;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-form input, form textarea {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-form button {
-  padding: 12px 20px;
-  background-color: #111;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-form button:hover {
-  background-color: #333;
-}
-
-/* Bewertungen */
-#bewertungen {
-  background: #f0f0f0;
-  padding: 40px 20px;
-  margin-top: 40px;
-  border-top: 2px solid #ccc;
-}
-
-.review {
-  background: #fff;
-  padding: 15px;
-  margin: 15px auto;
-  max-width: 500px;
-  border-radius: 6px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-}
-
-/* Footer */
-footer {
-  background-color: #222;
-  color: white;
-  text-align: center;
-  padding: 15px;
-  margin-top: 40px;
-}
-.buchung-button {
-  background-color: #fdd835;
-  color: black;
-  padding: 12px 20px;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 6px;
-  display: inline-block;
-  margin-top: 20px;
-  transition: background 0.3s;
-}
-
-.buchung-button:hover {
-  background-color: #fbc02d;
-}
-/* Allgemeine Einstellungen */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
-  background-color: #fafafa;
-  color: #333;
-}
-
-/* Navigation */
-nav {
-  background-color: #222;
-  padding: 10px;
-  text-align: center;
-}
-
-nav a {
-  color: #fff;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
+  font-size: 16px;
 }
 
 nav a:hover {
   color: #ffcc00;
 }
 
-/* Box-Design für Inhalte */
+/* Boxen für Inhalt (zentriert wie auf Startseite) */
 .section-box {
   max-width: 800px;
-  margin: 30px auto;
-  background: white;
-  padding: 20px;
+  margin: 40px auto; /* mittig */
+  background: #fff;
+  padding: 30px 25px;
   border-radius: 8px;
-  box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+  text-align: center; /* alles zentriert */
+}
+
+/* Überschriften */
+h1, h2 {
+  color: #111;
+  margin-bottom: 20px;
+}
+
+/* Text in Boxen */
+.section-box p, .section-box li {
+  font-size: 16px;
+  margin-bottom: 15px;
 }
 
 /* Preise-Liste */
@@ -192,14 +64,43 @@ nav a:hover {
 }
 
 .prices-list li {
-  padding: 8px 0;
+  padding: 10px 0;
   border-bottom: 1px solid #ddd;
+}
+
+/* Buttons (falls verwendet) */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #111;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  margin: 10px 5px;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background-color: #333;
+}
+
+/* Footer */
+footer {
+  background-color: #222;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 50px;
 }
 
 /* Responsive */
 @media (max-width: 600px) {
   .section-box {
-    margin: 15px;
-    padding: 15px;
+    margin: 20px 15px;
+    padding: 20px;
+  }
+  nav a {
+    display: block;
+    margin: 5px 0;
   }
 }
