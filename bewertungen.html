@@ -17,18 +17,44 @@
 </div>
 
 <script>
-document.getElementById("reviewForm").addEventListener("submit", function(e) {
+const webAppUrl = "https://script.google.com/macros/s/AKfycbyMG3tC2I6U9Gjrw4FtevQ2IiMIOvuch_fCs5q9Y5vBAd47_PP_oUV_p63YdGy2cFgX/exec";
+
+// --- Funktion: Bewertungen laden ---
+async function loadReviews() {
+  const response = await fetch(webAppUrl);
+  const reviews = await response.json();
+
+  const container = document.getElementById("reviews");
+  container.innerHTML = "";
+
+  reviews.forEach(r => {
+    const div = document.createElement("div");
+    div.classList.add("single-review");
+    div.innerHTML = `<h4>${r.name} – ${"⭐".repeat(r.stars)}</h4><p>${r.opinion}</p>`;
+    container.appendChild(div);
+  });
+}
+
+// --- Formular absenden ---
+document.getElementById("reviewForm").addEventListener("submit", async function(e) {
   e.preventDefault();
-  let name = document.getElementById("name").value;
-  let rating = document.getElementById("rating").value;
-  let review = document.getElementById("review").value;
 
-  let reviewBox = document.createElement("div");
-  reviewBox.classList.add("single-review");
-  reviewBox.innerHTML = `<h4>${name} – ${"⭐".repeat(rating)}</h4><p>${review}</p>`;
+  const data = {
+    name: document.getElementById("name").value,
+    stars: parseInt(document.getElementById("rating").value),
+    opinion: document.getElementById("review").value
+  };
 
-  document.getElementById("reviews").appendChild(reviewBox);
+  await fetch(webAppUrl, {
+    method: "POST",
+    contentType: "application/json",
+    body: JSON.stringify(data)
+  });
 
   this.reset();
+  loadReviews(); // Kommentare direkt aktualisieren
 });
+
+// --- Beim Laden der Seite Kommentare anzeigen ---
+loadReviews();
 </script>
