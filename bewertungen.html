@@ -1,121 +1,58 @@
----
----
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Putzaffen – Bewertungen</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bewertungen – Putzaffen</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>Putzaffen</h1>
     <nav>
-      <a href="index.html">Home</a>
+      <a href="index.html">Startseite</a>
       <a href="preise.html">Preise</a>
-      <a href="übermich.html">über mich</a>
+      <a href="ueber-mich.html">Über mich</a>
       <a href="bewertungen.html">Bewertungen</a>
-      <a href="bewertung-senden.html">Bewertung senden</a>
+      <a href="bewertungsenden.html">Bewertung senden</a>
     </nav>
   </header>
 
   <main>
-    <section class="section-box">
+    <div class="section-box">
       <h2>Alle Bewertungen</h2>
-      <div id="reviews">
-        <p>Bewertungen konnten nicht geladen werden.</p>
-      </div>
-    </section>
+      <div id="reviews">Bewertungen werden geladen...</div>
+    </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 Putzaffen – Fensterreinigung</p>
+    &copy; 2025 Putzaffen – Fensterreinigung
   </footer>
 
   <script>
-  // ---- Konfiguration: deine Web-App URL hier einfügen ----
-  const webAppUrl = "https://script.google.com/macros/s/AKfycbwY4Jiz3l8DkfxLvltZ3J01iTrXpg6i4mlDXB4NIrnFjDrnXKyHTfaOO2zTLxWM0HChoA/exec";
-  // ------------------------------------------------------
+    const webAppUrl = "https://script.google.com/macros/s/AKfycbwY4Jiz3l8DkfxLvltZ3J01iTrXpg6i4mlDXB4NIrnFjDrnXKyHTfaOO2zTLxWM0HChoA/exec";
 
-  // Einfache HTML-Escaping-Funktion (gegen unerwünschtes HTML)
-  function escapeHtml(str) {
-    if (str === null || str === undefined) return "";
-    return String(str)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#39;");
-  }
+    async function loadReviews() {
+      try {
+        const response = await fetch(webAppUrl);
+        const reviews = await response.json();
 
-  // Hilfsfunktion: Datum lesbar machen (falls vorhanden)
-  function formatTimestamp(ts) {
-    if (!ts) return "";
-    try {
-      const d = new Date(ts);
-      if (isNaN(d)) return escapeHtml(String(ts));
-      return d.toLocaleString("de-DE");
-    } catch (e) {
-      return escapeHtml(String(ts));
-    }
-  }
+        const container = document.getElementById("reviews");
+        container.innerHTML = "";
 
-  async function loadReviews() {
-    const container = document.getElementById("reviews");
-    container.innerHTML = "<p>Lädt Bewertungen…</p>";
-
-    try {
-      const response = await fetch(webAppUrl, { cache: "no-cache" });
-      if (!response.ok) throw new Error("Netzwerk-Fehler: " + response.status);
-
-      const reviews = await response.json();
-
-      if (!Array.isArray(reviews) || reviews.length === 0) {
-        container.innerHTML = "<p>Noch keine Bewertungen vorhanden.</p>";
-        return;
+        reviews.forEach(r => {
+          const div = document.createElement("div");
+          div.classList.add("single-review");
+          div.innerHTML = `<h4>${r.name} – ${r.stars}</h4><p>${r.comment || ""}</p>`;
+          container.appendChild(div);
+        });
+      } catch (error) {
+        document.getElementById("reviews").innerHTML = "Bewertungen konnten nicht geladen werden.";
+        console.error("Fehler beim Laden der Bewertungen:", error);
       }
-
-      container.innerHTML = ""; // Platzhalter entfernen
-
-      reviews.forEach(r => {
-        // Verschiedene mögliche Schlüssel abdecken
-        const name = escapeHtml(r.name || r.Name || r[1] || "Anonym");
-        const rawStars = (r.stars ?? r.Stars ?? r.bewertung ?? r.Bewertung ?? r.rating ?? r.Rating ?? r[2] ?? "");
-        const comment = escapeHtml(r.opinion || r.comment || r.Comment || r.kommentar || r.Kommentar || r[3] || "");
-        const timestamp = formatTimestamp(r.timestamp || r.Timestamp || r.time || r.Time || "");
-
-        // Sterne-Anzeige:
-        // - Wenn rawStars numerisch => ★ wiederholen
-        // - Sonst Rohwert anzeigen (z. B. Emoji "★", "★★★", etc.)
-        let starsDisplay = "";
-        if (rawStars === null || rawStars === undefined) {
-          starsDisplay = "";
-        } else if (typeof rawStars === "number" || (!isNaN(parseInt(rawStars)) && String(rawStars).trim().length <= 2)) {
-          const n = parseInt(rawStars) || 0;
-          starsDisplay = "★".repeat(Math.max(0, Math.min(n, 10))); // Schutz: max 10
-        } else {
-          starsDisplay = escapeHtml(String(rawStars)); // z.B. Emoji-Sterne direkt anzeigen
-        }
-
-        const div = document.createElement("div");
-        div.classList.add("single-review");
-        div.innerHTML = `
-          <h4>${name}${starsDisplay ? " – " + starsDisplay : ""}${timestamp ? ' <small>(' + escapeHtml(timestamp) + ')</small>' : ''}</h4>
-          <p>${comment}</p>
-        `;
-        container.appendChild(div);
-      });
-
-    } catch (err) {
-      console.error("Fehler beim Laden der Bewertungen:", err);
-      container.innerHTML = "<p>Bewertungen konnten nicht geladen werden.</p>";
     }
-  }
 
-  // Seite geladen -> Bewertungen abrufen
-  loadReviews();
+    loadReviews();
   </script>
 </body>
 </html>
