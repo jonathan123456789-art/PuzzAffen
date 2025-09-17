@@ -32,31 +32,42 @@
     <p>&copy; 2025 Putzaffen – Fensterreinigung</p>
   </footer>
 
-  <script>
-    const webAppUrl = "https://script.google.com/macros/s/AKfycbwY4Jiz3l8DkfxLvltZ3J01iTrXpg6i4mlDXB4NIrnFjDrnXKyHTfaOO2zTLxWM0HChoA/exec";
+<script>
+const webAppUrl = "https://script.google.com/macros/s/AKfycbwY4Jiz3l8DkfxLvltZ3J01iTrXpg6i4mlDXB4NIrnFjDrnXKyHTfaOO2zTLxWM0HChoA/exec";
 
-    async function loadReviews() {
-      try {
-        const response = await fetch(webAppUrl);
-        const reviews = await response.json();
+async function loadReviews() {
+  try {
+    const response = await fetch(webAppUrl);
+    if (!response.ok) throw new Error("Netzwerk-Fehler: " + response.status);
 
-        const container = document.getElementById("reviews");
-        container.innerHTML = "";
+    const reviews = await response.json();
 
-        reviews.forEach(r => {
-          const div = document.createElement("div");
-          div.classList.add("single-review");
-          div.innerHTML = `<h4>${r.name} – ${"⭐".repeat(r.stars)}</h4><p>${r.opinion}</p>`;
-          container.appendChild(div);
-        });
-      } catch (error) {
-        console.error("Fehler beim Laden der Bewertungen:", error);
-        const container = document.getElementById("reviews");
-        container.innerHTML = "<p>Die Bewertungen konnten nicht geladen werden.</p>";
-      }
+    const container = document.getElementById("reviews");
+    container.innerHTML = "";
+
+    if (reviews.length === 0) {
+      container.innerHTML = "<p>Noch keine Bewertungen vorhanden.</p>";
+      return;
     }
 
-    loadReviews();
-  </script>
+    reviews.forEach(r => {
+      const stars = parseInt(r.stars) || 0; // in Zahl umwandeln
+      const div = document.createElement("div");
+      div.classList.add("single-review");
+      div.innerHTML = `
+        <h4>${r.name} – ${"⭐".repeat(stars)}</h4>
+        <p>${r.opinion}</p>
+      `;
+      container.appendChild(div);
+    });
+
+  } catch (err) {
+    console.error("Fehler beim Laden:", err);
+    document.getElementById("reviews").innerHTML = "<p>Bewertungen konnten nicht geladen werden.</p>";
+  }
+}
+
+loadReviews();
+</script>
 </body>
 </html>
