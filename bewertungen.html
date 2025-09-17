@@ -1,25 +1,9 @@
-<div class="review-box">
-  <h2>Hinterlasse eine Bewertung</h2>
-  <form id="reviewForm">
-    <input type="text" id="name" placeholder="Dein Name" required>
-    <select id="rating" required>
-      <option value="">⭐ Bewertung</option>
-      <option value="5">⭐⭐⭐⭐⭐</option>
-      <option value="4">⭐⭐⭐⭐</option>
-      <option value="3">⭐⭐⭐</option>
-      <option value="2">⭐⭐</option>
-      <option value="1">⭐</option>
-    </select>
-    <textarea id="review" placeholder="Deine Meinung..." required></textarea>
-    <button type="submit">Absenden</button>
-  </form>
-  <div id="reviews"></div>
-</div>
+<h2>Alle Bewertungen</h2>
+<div id="reviews"></div>
 
 <script>
-const webAppUrl = "https://script.google.com/macros/s/AKfycbyMG3tC2I6U9Gjrw4FtevQ2IiMIOvuch_fCs5q9Y5vBAd47_PP_oUV_p63YdGy2cFgX/exec";
+const webAppUrl = "https://script.google.com/macros/s/AKfycbwY4Jiz3l8DkfxLvltZ3J01iTrXpg6i4mlDXB4NIrnFjDrnXKyHTfaOO2zTLxWM0HChoA/exec";
 
-// --- Funktion: Bewertungen laden ---
 async function loadReviews() {
   const response = await fetch(webAppUrl);
   const reviews = await response.json();
@@ -35,26 +19,5 @@ async function loadReviews() {
   });
 }
 
-// --- Formular absenden ---
-document.getElementById("reviewForm").addEventListener("submit", async function(e) {
-  e.preventDefault();
-
-  const data = {
-    name: document.getElementById("name").value,
-    stars: parseInt(document.getElementById("rating").value),
-    opinion: document.getElementById("review").value
-  };
-
-  await fetch(webAppUrl, {
-    method: "POST",
-    contentType: "application/json",
-    body: JSON.stringify(data)
-  });
-
-  this.reset();
-  loadReviews(); // Kommentare direkt aktualisieren
-});
-
-// --- Beim Laden der Seite Kommentare anzeigen ---
 loadReviews();
 </script>
