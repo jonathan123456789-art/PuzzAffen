@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Putzaffen – Bewertungen</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -24,7 +24,9 @@
   <main>
     <section class="section-box">
       <h2>Alle Bewertungen</h2>
-      <div id="reviews"></div>
+      <div id="reviews">
+        <p>Bewertungen konnten nicht geladen werden.</p>
+      </div>
     </section>
   </main>
 
@@ -32,42 +34,88 @@
     <p>&copy; 2025 Putzaffen – Fensterreinigung</p>
   </footer>
 
-<script>
-const webAppUrl = "https://script.google.com/macros/s/AKfycbwY4Jiz3l8DkfxLvltZ3J01iTrXpg6i4mlDXB4NIrnFjDrnXKyHTfaOO2zTLxWM0HChoA/exec";
+  <script>
+  // ---- Konfiguration: deine Web-App URL hier einfügen ----
+  const webAppUrl = "https://script.google.com/macros/s/AKfycbwY4Jiz3l8DkfxLvltZ3J01iTrXpg6i4mlDXB4NIrnFjDrnXKyHTfaOO2zTLxWM0HChoA/exec";
+  // ------------------------------------------------------
 
-async function loadReviews() {
-  try {
-    const response = await fetch(webAppUrl);
-    if (!response.ok) throw new Error("Netzwerk-Fehler: " + response.status);
-
-    const reviews = await response.json();
-
-    const container = document.getElementById("reviews");
-    container.innerHTML = "";
-
-    if (reviews.length === 0) {
-      container.innerHTML = "<p>Noch keine Bewertungen vorhanden.</p>";
-      return;
-    }
-
-    reviews.forEach(r => {
-      const stars = parseInt(r.stars) || 0; // in Zahl umwandeln
-      const div = document.createElement("div");
-      div.classList.add("single-review");
-      div.innerHTML = `
-        <h4>${r.name} – ${"⭐".repeat(stars)}</h4>
-        <p>${r.opinion}</p>
-      `;
-      container.appendChild(div);
-    });
-
-  } catch (err) {
-    console.error("Fehler beim Laden:", err);
-    document.getElementById("reviews").innerHTML = "<p>Bewertungen konnten nicht geladen werden.</p>";
+  // Einfache HTML-Escaping-Funktion (gegen unerwünschtes HTML)
+  function escapeHtml(str) {
+    if (str === null || str === undefined) return "";
+    return String(str)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
   }
-}
 
-loadReviews();
-</script>
+  // Hilfsfunktion: Datum lesbar machen (falls vorhanden)
+  function formatTimestamp(ts) {
+    if (!ts) return "";
+    try {
+      const d = new Date(ts);
+      if (isNaN(d)) return escapeHtml(String(ts));
+      return d.toLocaleString("de-DE");
+    } catch (e) {
+      return escapeHtml(String(ts));
+    }
+  }
+
+  async function loadReviews() {
+    const container = document.getElementById("reviews");
+    container.innerHTML = "<p>Lädt Bewertungen…</p>";
+
+    try {
+      const response = await fetch(webAppUrl, { cache: "no-cache" });
+      if (!response.ok) throw new Error("Netzwerk-Fehler: " + response.status);
+
+      const reviews = await response.json();
+
+      if (!Array.isArray(reviews) || reviews.length === 0) {
+        container.innerHTML = "<p>Noch keine Bewertungen vorhanden.</p>";
+        return;
+      }
+
+      container.innerHTML = ""; // Platzhalter entfernen
+
+      reviews.forEach(r => {
+        // Verschiedene mögliche Schlüssel abdecken
+        const name = escapeHtml(r.name || r.Name || r[1] || "Anonym");
+        const rawStars = (r.stars ?? r.Stars ?? r.bewertung ?? r.Bewertung ?? r.rating ?? r.Rating ?? r[2] ?? "");
+        const comment = escapeHtml(r.opinion || r.comment || r.Comment || r.kommentar || r.Kommentar || r[3] || "");
+        const timestamp = formatTimestamp(r.timestamp || r.Timestamp || r.time || r.Time || "");
+
+        // Sterne-Anzeige:
+        // - Wenn rawStars numerisch => ★ wiederholen
+        // - Sonst Rohwert anzeigen (z. B. Emoji "★", "★★★", etc.)
+        let starsDisplay = "";
+        if (rawStars === null || rawStars === undefined) {
+          starsDisplay = "";
+        } else if (typeof rawStars === "number" || (!isNaN(parseInt(rawStars)) && String(rawStars).trim().length <= 2)) {
+          const n = parseInt(rawStars) || 0;
+          starsDisplay = "★".repeat(Math.max(0, Math.min(n, 10))); // Schutz: max 10
+        } else {
+          starsDisplay = escapeHtml(String(rawStars)); // z.B. Emoji-Sterne direkt anzeigen
+        }
+
+        const div = document.createElement("div");
+        div.classList.add("single-review");
+        div.innerHTML = `
+          <h4>${name}${starsDisplay ? " – " + starsDisplay : ""}${timestamp ? ' <small>(' + escapeHtml(timestamp) + ')</small>' : ''}</h4>
+          <p>${comment}</p>
+        `;
+        container.appendChild(div);
+      });
+
+    } catch (err) {
+      console.error("Fehler beim Laden der Bewertungen:", err);
+      container.innerHTML = "<p>Bewertungen konnten nicht geladen werden.</p>";
+    }
+  }
+
+  // Seite geladen -> Bewertungen abrufen
+  loadReviews();
+  </script>
 </body>
 </html>
