@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abo-Modelle – Putztiger</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Spezielles Styling für die Abo-Klappen */
+    details {
+      max-width: 600px;
+      margin: 15px auto;
+      background: #fff;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    summary {
+      padding: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      list-style: none;
+      background-color: #f4f4f4;
+    }
+
+    /* Hervorhebung für M und X */
+    .highlight summary {
+      background-color: #fff4cc;
+      border-bottom: 2px solid #ffcc00;
+    }
+
+    summary:hover {
+      background-color: #ffcc00;
+      color: black;
+    }
+
+    .abo-content {
+      padding: 20px;
+      text-align: left;
+    }
+
+    .abo-item {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    .abo-item:last-child { border-bottom: none; }
+
+    .abo-name {
+      font-weight: bold;
+      font-size: 18px;
+      display: block;
+    }
+
+    .abo-price {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 16px;
+      color: #555;
+    }
+
+    .info-text {
+      max-width: 600px;
+      margin: 40px auto 20px auto;
+      font-style: italic;
+      color: #666;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Putztiger</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="preise.html">Preise</a>
+      <a href="uebermich.html">über mich</a>
+      <a href="unser-angebot.html">Unser Angebot</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Unsere Abo-Modelle</h2>
+    <p>Wähle deine Hausgröße und entdecke den passenden Ganzjahres-Glanz.</p>
+
+    <details>
+      <summary>Paket S (Wohnungen / Kleinobjekte)</summary>
+      <div class="abo-content">
+        <p>Da jedes Objekt in dieser Kategorie einzigartig ist, berechnen wir den Preis individuell nach Besichtigung oder Foto.</p>
+        <div class="abo-item">
+          <span class="abo-name">Basis / Premium / VIP Tiger</span>
+          <span class="abo-price">Preis auf Anfrage</span>
+        </div>
+      </div>
+    </details>
+
+    <details class="highlight" open>
+      <summary>Paket M (10 – 20 Fenster) ⭐</summary>
+      <div class="abo-content">
+        <div class="abo-item">
+          <span class="abo-name">Basis Tiger</span>
+          <span class="abo-price">80€ im Jahr</span>
+        </div>
+        <div class="abo-item">
+          <span class="abo-name">Premium Tiger (10% sparen)</span>
+          <span class="abo-price">160€ im Jahr</span>
+        </div>
+        <div class="abo-item">
+          <span class="abo-name">VIP Tiger (20% sparen)</span>
+          <span class="abo-price">256€ im Jahr</span>
+        </div>
+      </div>
+    </details>
+
+    <details class="highlight">
+      <summary>Paket X (20 – 30 Fenster) ⭐</summary>
+      <div class="abo-content">
+        <div class="abo-item">
+          <span class="abo-name">Basis Tiger</span>
+          <span class="abo-price">160€ im Jahr</span>
+        </div>
+        <div class="abo-item">
+          <span class="abo-name">Premium Tiger (10% sparen)</span>
+          <span class="abo-price">360€ im Jahr</span>
+        </div>
+        <div class="abo-item">
+          <span class="abo-name">VIP Tiger (20% sparen)</span>
+          <span class="abo-price">512€ im Jahr</span>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Paket XL (ab 30 Fenster)</summary>
+      <div class="abo-content">
+        <div class="abo-item">
+          <span class="abo-name">Basis Tiger</span>
+          <span class="abo-price">320€ im Jahr</span>
+        </div>
+        <div class="abo-item">
+          <span class="abo-name">Premium Tiger (10% sparen)</span>
+          <span class="abo-price">740€ im Jahr</span>
+        </div>
+        <div class="abo-item">
+          <span class="abo-name">VIP Tiger (20% sparen)</span>
+          <span class="abo-price">999€ im Jahr</span>
+        </div>
+      </div>
+    </details>
+
+    <div class="info-text">
+      <p>Alle Abos beinhalten eine professionelle Reinigung durch die PutzTiger. Bei Premium und VIP sind die Rahmenreinigung sowie die Fensterbretter inklusive. Die VIP-Option garantiert dir 8 Reinigungen pro Jahr für den perfekten Durchblick zu jeder Jahreszeit.</p>
+    </div>
+
+    <div class="buttons">
+      <a href="https://forms.gle/LVFC7yaAt1bxMyeVA" target="_blank" class="buchung-button">Jetzt Abo anfragen</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Putztiger – Fensterreinigung</p>
+  </footer>
+</body>
+</html>
