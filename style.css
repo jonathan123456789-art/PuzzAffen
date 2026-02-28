@@ -172,3 +172,18 @@ footer {
     border-bottom: 2px solid #f5c518;
     padding-bottom: 10px;
 }
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #000;
+    font-size: 14px;
+}
+
+footer a {
+    color: #aaa;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #f5c518;
+}
